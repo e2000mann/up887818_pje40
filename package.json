@@ -1,0 +1,23 @@
+{
+  "name": "up887818_pje40",
+  "version": "1.0.0",
+  "description": "Online Discrete Mathematics Learning Resource",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/up887818/up887818_pje40.git"
+  },
+  "author": "up887818",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/up887818/up887818_pje40/issues"
+  },
+  "homepage": "https://github.com/up887818/up887818_pje40#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
