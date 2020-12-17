@@ -10,17 +10,24 @@
 </head>
 
 <body>
+  <!-- Scripts -->
+  <script src="../js/index.js"></script>
   <h1>Online Discrete Mathematics Learning Resource</h1>
   <section class="headers">
-    <h2 id="left">Topics</h2>
-    <h2 id="right">Highscore</h2>
-  </section>
-  <section class="topic">
-    <p>Introduction to Sets</p>
-    <button type="button" name="lesson">Lesson</button>
-    <button type="button" name="Quiz">Quiz</button>
-    <p>N/A (N/A%)</p>
+    <h2 class="left">Topics</h2>
+    <h2 class="right">Highscore</h2>
   </section>
 </body>
+
+<!-- Templates -->
+<template id="topicSection">
+  <section class="topic">
+    <p class="topicName">Topic Name Here</p>
+    <button type="button" name="lesson" onclick="loadLesson()">Lesson</button>
+    <button type="button" name="Quiz" onclick="loadQuiz()">Quiz</button>
+    <!-- Score paragraph -->
+    <p class="topicScore">N/A (N/A%)</p>
+  </section>
+</template>
 
 </html>

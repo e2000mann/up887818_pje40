@@ -1,0 +1,8 @@
+* {
+  margin: auto;
+  text-align: center;
+}
+
+.headers *, .topic * {
+  display: inline;
+}
