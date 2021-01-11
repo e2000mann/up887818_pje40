@@ -32,8 +32,12 @@ function addSpecialTopicSection(value){
   let textBox = clone.querySelectorAll("p")[0];
   textBox.textContent = text;
 
+  // change onClick functions for buttons to load right lesson/quiz
+  let buttons = clone.querySelectorAll("button");
+  setButtonEvents(buttons, value.id);
+
   // remove quiz button as not necessary (2nd button tag in clone)
-  let quizButton = clone.querySelectorAll("button")[1];
+  let quizButton = buttons[1];
   console.log(quizButton);
   quizButton.remove();
 
@@ -53,8 +57,34 @@ function addTopicSection(value){
   let textBox = clone.querySelectorAll("p")[0];
   textBox.textContent = text;
 
+  // change onClick functions for buttons to load right lesson/quiz
+  let buttons = clone.querySelectorAll("button");
+  setButtonEvents(buttons, value.id);
+
+  console.log(clone.querySelectorAll("button"));
+
   // add clone to DOM
   document.body.appendChild(clone);
+}
+
+//function to set onclick functions
+function setButtonEvents(buttons, id){
+  // lesson button
+  buttons[0].setAttribute("onClick", `loadLesson(${id})`);
+  // Quiz button
+  buttons[1].setAttribute("onClick", `loadQuiz(${id})`);
+}
+
+// function to redirect to lesson page
+function loadLesson(id){
+  sessionStorage.setItem("id", id);
+  window.location.href = "lesson.html";
+}
+
+//function to redirect to quiz page
+function loadQuiz(id){
+  sessionStorage.setItem("id", id);
+  window.location.href = "quiz.html";
 }
 
 //loads topics when window is loaded
