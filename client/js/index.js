@@ -88,4 +88,4 @@ function loadQuiz(id){
 }
 
 //loads topics when window is loaded
-window.addEventListener("load", loadTopics());
+window.onload = loadTopics;

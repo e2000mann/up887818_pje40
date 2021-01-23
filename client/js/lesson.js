@@ -1,12 +1,12 @@
 `use strict`;
 
 // loads lesson into DOM
-function loadLesson(){
+async function loadLesson(){
   // get topic id from sessionStorage
   const id = sessionStorage.getItem("id");
-  let header = document.getElementsByTagName("h1");
-  console.log(header);
-  header.textContent = `This is lesson ${id}`;
+  let title = document.getElementsByTagName("h1");
+  title[0].textContent = `This is lesson ${id}`;
 }
 
-window.addEventListener("onload", loadLesson());
+//loads lesson when window has loaded
+window.onload = loadLesson;
