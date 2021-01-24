@@ -12,9 +12,10 @@
   - name (same as what is in directory.json, although this is not checked)
   - array of "paragraphs" in the format
     {"text" : "Lorem ipsum dolor sit amet...".
-    "example": "functionName" *optional*}
-- examples.js contains all the examples, given as functions
+    "example": {"imageFile": "example.png",
+                "caption": "example"}}
 
 ### How to add quiz to topic (10 questions only)
-- questions are in questions.js
-- each question gets its own function, q1() to q10()
+- questions are in questions.mjs (mjs being a module javascript file)
+- each question gets its own function, q1() to q10(), as well as a CheckAnswer function
+  q1CheckAnswer(input) to q10CheckAnswer(input)
