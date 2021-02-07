@@ -8,5 +8,9 @@ function loadQuiz(){
   title[0].textContent = `This is quiz ${id}`;
 }
 
+function checkAnswers(){
+  return 10;
+}
+
 // loads quiz when window has loaded
 window.onload = loadQuiz;
