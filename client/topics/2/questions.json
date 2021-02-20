@@ -7,5 +7,13 @@
   "options": ["Natural Numbers":"N",
               "Real Numbers": "R",
               "Integers": "Z",
-              "Rational Numbers": "Q"]}
+              "Rational Numbers": "Q"]},
+  {"title": "Which of these is the correct notation for a set?",
+  "type": "single-select",
+  "options":["(1, 2, 3)",
+             "{1, 2, 3}",
+             "[1, 2, 3]",
+             "1, 2, 3"]},
+   {"title": "Are these sets equal?",
+    "type": "true-false-random"},
   ]}
