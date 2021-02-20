@@ -32,5 +32,4 @@ app.get('/loadDir', getDirectory);
 app.get('/loadLesson', loadLesson);
 
 // listens on to port, either set directly by heroku (process.env.PORT) or 8080
-const PORT = process.env.PORT || 8080;
-app.listen(8080);
+app.listen(process.env.PORT || 8080);
