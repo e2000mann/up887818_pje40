@@ -8,14 +8,12 @@ async function loadQuiz(){
   title[0].textContent = `This is quiz ${id}`;
 
   // get questions json file from server
-  // retrieve lesson data from server
   let url = `/loadQuiz?id=${id}`;
   let response = await fetch(url);
   let quizFile = await response.json();
 
   // add questions into DOM
-  console.log(quizFile);
-  addQuestions(quizFile);
+  addQuestions(quizFile.questions);
 
   // add click event to submit button
   let submitButton = document.getElementsByName("Submit")[0];
@@ -24,8 +22,10 @@ async function loadQuiz(){
 }
 
 // this goes through and adds the questions from the json file.
-function addQuestions(json){
-  return;
+function addQuestions(questions){
+  for (question in questions){
+    console.log(question);
+  }
 }
 
 // this goes through and checks the answers
