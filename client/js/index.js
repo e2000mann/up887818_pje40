@@ -42,6 +42,8 @@ function addSpecialTopicSection(value){
   // remove score section as not necessary
   let scoreText = clone.querySelector(".topicScore");
   scoreText.remove();
+  // also remove share button (3rd button tag in clone)
+  buttons[2].remove();
 
   // add clone to DOM
   document.body.appendChild(clone);
@@ -51,6 +53,11 @@ function addSpecialTopicSection(value){
 function addTopicSection(value){
   // copy template content (inc. children)
   let clone = topicSection.content.cloneNode(true);
+
+  let sectionEle = clone.querySelectorAll("section")[0];
+  console.log(sectionEle);
+  sectionEle.setAttribute("id",value.id);
+  sectionEle.setAttribute("name",value.name);
 
   // change text using value
   // output = "n) Topic name", where n is topic id
@@ -78,6 +85,8 @@ function setButtonEvents(buttons, id){
   buttons[0].setAttribute("onClick", `loadLesson(${id})`);
   // Quiz button
   buttons[1].setAttribute("onClick", `loadQuiz(${id})`);
+  // Share button
+  buttons[2].setAttribute("onClick", `shareFB()`);
 }
 
 // function to redirect to lesson page
@@ -100,6 +109,16 @@ function updateHighscore(id, scoreText){
     let percentage = rawScore / 10;
     scoreText.textContent = `${rawScore} (${percentage}%)`;
     scoreText.title = `You currently have ${percentage}%! Can you get higher?`;
+  }
+}
+
+// for facebook share function - use a different quote if user has score for topic
+function getQuote(id, name){
+  if (id in sessionStorage){
+    let score = sessionStorage.getItem(id);
+    return `I scored ${percentage}% on the ${name} quiz! Learn Discrete Mathematics here!`;
+  } else {
+    return `Are you interested in ${name}? Learn Discrete Mathematics here!`;
   }
 }
 

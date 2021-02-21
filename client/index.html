@@ -13,6 +13,32 @@
 
 <body>
   <!-- Scripts -->
+  <!-- Facebook API -->
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '2585382981753501',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v9.0'
+      });
+    };
+
+    function shareFB() {
+			let id = event.target.parentNode.getAttribute("id");
+      let name = event.target.parentNode.getAttribute("name");
+			let url = window.location.href;
+
+			FB.ui({
+				method: 'share',
+				href: url,
+				quote: getQuote(id, name)
+			}, function(response) {});
+		}
+  </script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <!-- My own code -->
   <script src="../js/index.js"></script>
 
   <!-- Prepared DOM elements -->
@@ -31,6 +57,8 @@
     <button type="button" name="Quiz" onclick="loadQuiz()">Quiz</button>
     <!-- Score paragraph -->
     <p class="topicScore" title="You haven't completed this quiz yet!">N/A (N/A%)</p>
+    <!-- social media sharing -->
+    <button type="button" name="share"> Share on Facebook </button>
   </section>
 </template>
 
