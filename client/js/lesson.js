@@ -53,6 +53,12 @@ async function loadLesson(){
     // before quiz buttons (specified earlier)
     document.body.insertBefore(paraSection, quizButtons);
   }
+
+  // remove quizButtons for first lesson - no quiz available
+  if (id == "1"){
+    quizButtons.remove();
+  }
+  
 }
 
 //loads lesson when window has loaded

@@ -38,8 +38,10 @@ function addSpecialTopicSection(value){
 
   // remove quiz button as not necessary (2nd button tag in clone)
   let quizButton = buttons[1];
-  console.log(quizButton);
   quizButton.remove();
+  // remove score section as not necessary
+  let scoreText = clone.querySelector(".topicScore");
+  scoreText.remove();
 
   // add clone to DOM
   document.body.appendChild(clone);
@@ -63,6 +65,9 @@ function addTopicSection(value){
 
   console.log(clone.querySelectorAll("button"));
 
+  // check for Highscore
+  updateHighscore(value.id, clone.querySelector(".topicScore"));
+
   // add clone to DOM
   document.body.appendChild(clone);
 }
@@ -85,6 +90,17 @@ function loadLesson(id){
 function loadQuiz(id){
   sessionStorage.setItem("id", id);
   window.location.href = "quiz.html";
+}
+
+// function to check if score exists & update score element if yes
+function updateHighscore(id, scoreText){
+  if (id in sessionStorage){
+    let rawScore = sessionStorage.getItem(id);
+    // raw score is between 0 (0%) and 1000 (100%)
+    let percentage = rawScore / 10;
+    scoreText.textContent = `${rawScore} (${percentage}%)`;
+    scoreText.title = `You currently have ${percentage}%! Can you get higher?`;
+  }
 }
 
 //loads topics when window is loaded
