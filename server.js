@@ -3,6 +3,8 @@
 // Libraries
 const express = require('express');
 const fs = require('fs');
+
+// starts server
 const app = express();
 // sets base file as client
 app.use(express.static('client'));
@@ -27,9 +29,19 @@ function loadLesson(req, res){
   res.json(jsonFile);
 }
 
+//gives quiz.json
+// used for GET request /loadQuiz
+//req.query contains id only
+function loadQuiz(req, res){
+  let jsonLocation = `client/topics/${req.query.id}/quiz.json`;
+  let jsonFile = JSON.parse(fs.readFileSync(jsonLocation, 'utf8'));
+  res.json(jsonFile);
+}
+
 // GET requests
 app.get('/loadDir', getDirectory);
 app.get('/loadLesson', loadLesson);
+app.get('/loadQuiz', loadQuiz);
 
 // listens on to port, either set directly by heroku (process.env.PORT) or 8080
 app.listen(process.env.PORT || 8080);

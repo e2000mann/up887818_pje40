@@ -1,13 +1,21 @@
 `use strict`;
 
 // loads quiz into DOM
-function loadQuiz(){
+async function loadQuiz(){
   // get topic id from sessionStorage
   const id = sessionStorage.getItem("id");
   let title = document.getElementsByTagName("h1");
   title[0].textContent = `This is quiz ${id}`;
 
-  // add questions
+  // get questions json file from server
+  // retrieve lesson data from server
+  let url = `/loadQuiz?id=${id}`;
+  let response = await fetch(url);
+  let quizFile = await response.json();
+
+  // add questions into DOM
+  console.log(quizFile);
+  addQuestions(quizFile);
 
   // add click event to submit button
   let submitButton = document.getElementsByName("Submit")[0];
@@ -15,10 +23,17 @@ function loadQuiz(){
   submitButton.addEventListener("click", () => {saveScore(id);});
 }
 
+// this goes through and adds the questions from the json file.
+function addQuestions(json){
+  return;
+}
+
+// this goes through and checks the answers
 function checkAnswers(){
   return 20;
 }
 
+// this saves the highest score to sessionStorage & returns user to homepage
 function saveScore(id){
   const score = checkAnswers();
   // save score to sessionStorage (if higher or first time)
