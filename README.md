@@ -16,6 +16,11 @@
                 "caption": "example"}}
 
 ### How to add quiz to topic (10 questions only)
-- questions are in questions.mjs (mjs being a module javascript file)
-- each question gets its own function, q1() to q10(), as well as a CheckAnswer function
-  q1CheckAnswer(input) to q10CheckAnswer(input)
+- questions are in quiz.json
+- available question formats:
+  - written
+  - single-select
+  - multi-select
+  - true-false
+  (the latter 3 can also have -random variants)
+- if the answer needs to be calculated add it into questions.mjs with the function name being the question number

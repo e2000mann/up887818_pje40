@@ -13,31 +13,24 @@
   <!-- Scripts -->
   <script src="../js/quiz.js"></script>
 
-  <!-- Prepared DOM elements -->
+  <!-- Prepared DOM elements (& submit button below)-->
   <h1>This is quiz x</h1>
   <p class="timer">You have x time remaining</p>
   <button name="back" onClick="window.location.href = `index.html`;"
   title="Your answers will be saved">
     Go back
   </button>
+
+  <!-- Custom elements are here -->
   <button type="button" name="Submit">Submit Answers</button>
 
 </body>
 
 <!-- Templates -->
 <template id="select">
-  <section>
-    <p class="topicName">Question x:</p>
-    <section class="choices">
-    </section>
-  </section>
-</template>
-
-<template id="text">
-  <section>
-    <p class="topicName">Question x:</p>
-    <input type="text">
-  </section>
+    <input type="checkbox"></input>
+    <label>
+    </label>
 </template>
 
 </html>
