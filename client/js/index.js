@@ -103,8 +103,8 @@ function loadQuiz(id){
 
 // function to check if score exists & update score element if yes
 function updateHighscore(id, scoreText){
-  if (id in sessionStorage){
-    let rawScore = sessionStorage.getItem(id);
+  if (id in localStorage){
+    let rawScore = localStorage.getItem(id);
     // raw score is between 0 (0%) and 1000 (100%)
     let percentage = rawScore / 10;
     scoreText.textContent = `${rawScore} (${percentage}%)`;
