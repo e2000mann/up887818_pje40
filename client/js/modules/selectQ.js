@@ -9,6 +9,8 @@ export function addSelectQuestion(question, q){
     console.log(answerNo);
     console.log(question.options[answerNo]);
     answers[q] = question.options[answerNo];
+  } else {
+    answers[q] = question.answer;
   }
 
   let optionsSection = document.createElement("section");

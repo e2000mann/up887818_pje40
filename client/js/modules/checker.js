@@ -10,7 +10,8 @@ export function checkAnswers(){
       let answerInput = currentQuestion.getElementsByTagName("input")[0];
       score = score + checkWrittenAnswer(answerInput, q);
       console.log("written");
-    } else {
+    }
+    else if (currentQuestion.className.includes("select")){
       let answerInput = currentQuestion.getElementsByTagName("section")[0];
       score = score + checkSelectAnswer(answerInput, q);
     }
@@ -55,7 +56,7 @@ function checkSelectAnswer(answerInput, q){
     // multi select
     return 0;
   } else {
-    let correctChoice = userAnswers.getElementsByName(correctAnswer)[0];
+    let correctChoice = userAnswers[correctAnswer];
     return correctChoice.checked ? 100: 0;
   }
 }
