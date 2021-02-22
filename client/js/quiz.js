@@ -32,14 +32,14 @@ function addQuestions(questions){
   // add each question
   // counter is used instead of "question in questions" so that
   // the index is easily accessible
-  for (let q = 0; q < 10; q++){
+  for (let q = 0; q < 4; q++){
     question = questions[q];
     console.log(question);
 
     // add section element with id of q (index) and class of question type
     let questionSection = document.createElement("section");
-    questionSection.id = q;
-    questionSection.class = question.type;
+    questionSection.id = `question${q}`;
+    questionSection.setAttribute("class", question.type);
 
     let questionTitle = document.createElement("p");
     questionTitle.textContent = `Question ${q+1}: ${question.title}`;
@@ -77,6 +77,7 @@ function addWrittenQuestion(question, q){
 // randomises answers if wanted
 function addSelectQuestion(question, q){
   if (question.type.includes("random")){
+    // select random option for answer
     answerNo = getRandomInt(question.options.length);
     console.log(answerNo);
     console.log(question.options[answerNo]);
@@ -89,6 +90,7 @@ function addSelectQuestion(question, q){
   const template = document.querySelector("#select");
   console.log(template);
 
+  // add options as DOM elements (input & matching label)
   for (let o = 0; o < question.options.length; o++){
     let optionName;
 
@@ -122,8 +124,37 @@ function getRandomInt(max) {
 
 // this goes through and checks the answers
 function checkAnswers(){
-  return 20;
+  let score = 0;
+  for (let q = 0; q < 4; q++){
+    // finds corresponding question element
+    // (have to escape character for it to find number ids)
+    let currentQuestion = document.querySelector(`#question${q}`);
+    if ("written" in currentQuestion.classList){
+      let answerInput = currentQuestion.getElementsByTagName("input")[0];
+      score = score + checkWrittenAnswer(answerInput, q);
+    }
+  }
+  return score;
 }
+
+
+
+// checks written answer
+function checkWrittenAnswer(answer, q){
+  let correctAnswer = answers[q];
+  if (typeof(correctAnswer) === 'array'){
+    //keywords
+    let includedWords = 0;
+    for (const keyWord in correctAnswer){
+      if (keyword in answer){
+        includedWords++;
+      }
+    }
+    return includedWords;
+  }
+}
+
+
 
 // this saves the highest score to sessionStorage & returns user to homepage
 function saveScore(id){
