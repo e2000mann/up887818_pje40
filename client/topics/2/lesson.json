@@ -1,11 +1,11 @@
 {
-  "name": "Introduction to Discrete Mathematics",
+  "name": "Introduction to Sets",
   "paragraphs": [
-    {"text": "This is an online resource for discrete mathematics"},
-    {"text": "I hope it helps you",
-    "example": {
-      "imageFile": "example1.png",
-      "caption": "A set of Fruits"
-      }}
+    {"text": "The definition of a set is: \"A collection of elements\".",
+      "example": {
+        "imageFile": "example1.png",
+        "caption": "A set of Fruits"
+      }},
+    {"text": "Sets can be defined in 3 ways, the first way is by using a semantic definition, e.g. \"A is the set whose members are the first four positive elements\". The next way is by using the roster definition, using curly brackets to enclose the list of members, e.g. \"A={1,2,3,4}\". The final way is to use set builder notation to describe the larger set and the condition the elements must meet, e.g. \"A = {x | x is an integer and x<5}\""}
   ]
 }
