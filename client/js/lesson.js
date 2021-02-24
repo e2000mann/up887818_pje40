@@ -21,7 +21,7 @@ async function loadLesson(){
   // add paragraphs
   for (const para of lessonFile.paragraphs){
     console.log(para);
-    addParagraph(para, quizButtons);
+    addParagraph(para, quizButtons, id);
   }
 
   // remove quizButtons for first lesson - no quiz available
@@ -31,7 +31,7 @@ async function loadLesson(){
 }
 
 // adds paragraph of lesson into DOM (before quiz buttons)
-function addParagraph(para, quizButtons){
+function addParagraph(para, quizButtons, id){
   // create section to store paragraph text & example
   let paraSection = document.createElement("section");
 
