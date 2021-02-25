@@ -26,6 +26,32 @@ async function loadQuiz(){
   let submitButton = document.getElementsByName("Submit")[0];
   // function has to be nested so that it does not run automatically
   submitButton.addEventListener("click", () => {saveScore(id);});
+
+  let clock = document.querySelector(".clock");
+
+  if (sessionStorage.getItem("time") != 0){
+    //timed quiz
+    let time = sessionStorage.getItem("time");
+    const deadline = new Date((new Date()).getTime() + time * 60000); // minutes
+    updateClock(clock, deadline, id)
+    // update clock once a second
+    let timer = setInterval(updateClock, 1000);
+
+    // update clock element
+    function updateClock(){
+      const t = getTimeRemaining(deadline);
+      if (t.m < 0) {
+        console.log("save");
+        clearInterval(timer);
+        saveScore(id);
+      }
+      clock.textContent = `You have ${t.m} minute(s) and ${t.s} second(s) remaining`;
+    }
+
+  } else {
+    //untimed quiz - no clock required.
+    clock.remove();
+  }
 }
 
 // this goes through and adds the questions from the json file.
@@ -82,6 +108,16 @@ function saveScore(id){
 
   // return user to homepage
   window.location.href = `index.html`;
+}
+
+function getTimeRemaining(deadline) {
+  // calculates remaining minutes (m) and seconds (s)
+  // if time has ran out m will be negative
+  const total = Date.parse(deadline) - Date.parse(new Date());
+  const s = Math.floor((total / 1000) % 60);
+  const m = Math.floor((total / 1000 / 60) % 60);
+
+  return {s, m};
 }
 
 // loads quiz when window has loaded
