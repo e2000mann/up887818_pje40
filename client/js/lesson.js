@@ -1,5 +1,7 @@
 `use strict`;
 
+import { setQuizButtons } from './modules/quizButtons.js';
+
 // loads lesson into DOM
 async function loadLesson(){
   // get topic id from sessionStorage
@@ -24,8 +26,10 @@ async function loadLesson(){
     addParagraph(para, quizButtons, id);
   }
 
+  setQuizButtons(quizButtons, id);
+
   // remove quizButtons for first lesson - no quiz available
-  if (id == "1"){
+  if (id === "1"){
     quizButtons.remove();
   }
 }

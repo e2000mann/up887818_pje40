@@ -1,7 +1,14 @@
 'use strict';
 
+import { setQuizButtons } from './modules/quizButtons.js';
+
 //loads topics into DOM
 async function loadTopics(){
+  // adds button functions to global scope (since this is type module)
+  window.loadQuiz = loadQuiz;
+  window.loadLesson = loadLesson;
+  window.getQuote = getQuote;
+
   // sends request to server to retrieve directory.json
   let url = '/loadDir';
   let response = await fetch(url);
@@ -111,6 +118,11 @@ function loadQuiz(id){
   if (quizButtons.className.includes("hidden")){
     sessionStorage.setItem("id", id);
     console.log("hidden");
+    // set click functions for button
+    setQuizButtons(quizButtons, id);
+    // cancel button (runs same function to hide buttons)
+    let cancelButton = document.getElementsByName("cancel")[0];
+    cancelButton.setAttribute('onClick', `loadQuiz(${id})`);
   }
   quizButtons.classList.toggle("hidden");
 }
