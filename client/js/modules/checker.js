@@ -2,10 +2,13 @@
 // this goes through and checks the answers
 export function checkAnswers(){
   let score = 0;
-  for (let q = 0; q < 4; q++){
+  // all question elements
+  let questions = document.querySelectorAll("body > section");
+  console.log(questions);
+  for (let q = 0; q < questions.length; q++){
     // finds corresponding question element
     // (have to escape character for it to find number ids)
-    let currentQuestion = document.querySelector(`#question${q}`);
+    let currentQuestion = questions[q];
     if (currentQuestion.className.includes("written")){
       let answerInput = currentQuestion.getElementsByTagName("input")[0];
       score = score + checkWrittenAnswer(answerInput, q);

@@ -6,3 +6,7 @@
 .headers *, .topic * {
   display: inline;
 }
+
+.hidden {
+  display: none;
+}

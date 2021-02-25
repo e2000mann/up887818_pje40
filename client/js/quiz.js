@@ -36,7 +36,7 @@ function addQuestions(questions){
   // add each question
   // counter is used instead of "question in questions" so that
   // the index is easily accessible
-  for (let q = 0; q < 4; q++){
+  for (let q = 0; q < questions.length; q++){
     let question = questions[q];
     console.log(question);
 

@@ -25,6 +25,10 @@ function addSpecialTopicSection(value){
   // copy template content (inc. children)
   let clone = topicSection.content.cloneNode(true);
 
+  // all content must be before quiz buttons
+  // quiz buttons are hidden until user selects a quiz
+  const quizButtons = document.querySelector("#quizButtons");
+
   // change text using value
   // output = "n) Topic name", where n is topic id
   let text = `${value.id}) ${value.name}`;
@@ -46,13 +50,17 @@ function addSpecialTopicSection(value){
   buttons[2].remove();
 
   // add clone to DOM
-  document.body.appendChild(clone);
+  // before quiz buttons (specified earlier)
+  document.body.insertBefore(clone, quizButtons);
 }
 
 // function for rest of topics
 function addTopicSection(value){
   // copy template content (inc. children)
   let clone = topicSection.content.cloneNode(true);
+
+  // all content must be before quiz buttons
+  const quizButtons = document.querySelector("#quizButtons");
 
   let sectionEle = clone.querySelectorAll("section")[0];
   console.log(sectionEle);
@@ -76,7 +84,8 @@ function addTopicSection(value){
   updateHighscore(value.id, clone.querySelector(".topicScore"));
 
   // add clone to DOM
-  document.body.appendChild(clone);
+  // before quiz buttons (specified earlier)
+  document.body.insertBefore(clone, quizButtons);
 }
 
 //function to set onclick functions
@@ -87,6 +96,7 @@ function setButtonEvents(buttons, id){
   buttons[1].setAttribute("onClick", `loadQuiz(${id})`);
   // Share button
   buttons[2].setAttribute("onClick", `shareFB()`);
+  console.log("set buttons");
 }
 
 // function to redirect to lesson page
@@ -97,8 +107,12 @@ function loadLesson(id){
 
 //function to redirect to quiz page
 function loadQuiz(id){
-  sessionStorage.setItem("id", id);
-  window.location.href = "quiz.html";
+  let quizButtons = document.querySelector("#quizButtons");
+  if (quizButtons.className.includes("hidden")){
+    sessionStorage.setItem("id", id);
+    console.log("hidden");
+  }
+  quizButtons.classList.toggle("hidden");
 }
 
 // function to check if score exists & update score element if yes
