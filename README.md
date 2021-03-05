@@ -4,8 +4,9 @@
 ## For maintainability
 
 ### How to add new topic to system
-- update client/topics/directory.json
-- add new files in client/topics/*topic number*
+- update client/topics/directory.json with topic id & name
+- add new files in client/topics/*topic id*
+- topic id must be an integer!
 
 ### How to add lesson to topic
 - lesson.json contains:
@@ -23,4 +24,4 @@
   - multi-select
   - true-false
   (the latter 3 can also have -random variants)
-- if the answer needs to be calculated add it into questions.mjs with the function name being the question number
+- if the answer needs to be calculated add it into questions.js with the function name being the question number

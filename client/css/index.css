@@ -1,12 +1,42 @@
+/* variables for light theme */
+:root {
+  --bg-color: white;
+  --outline: darkgray;
+  --font-color: black;
+}
+
 * {
-  margin: auto;
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  margin: auto 1vw 1vw auto;
   text-align: center;
+  font-family: sans-serif;
+}
+
+h1 {
+  margin-top: 1vw;
 }
 
 .headers *, .topic * {
-  display: inline;
+  display: inline-flex;
+  flex-direction: column;
 }
 
 .hidden {
   display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* variables for dark theme */
+  :root {
+    --bg-color: #2F2F2F;
+    --outline: black;
+    --font-color: white;
+  }
+}
+
+@media (max-width: 40em){
+  .headers *, .topic * {
+    flex-direction: row;
+  }
 }

@@ -11,6 +11,14 @@ window.answers = {}
 async function loadQuiz(){
   // get topic id from sessionStorage
   const id = sessionStorage.getItem("id");
+
+  // check that id is integer (sanitisation)
+  // if not error and go back to homepage
+  if !(typeof id === "integer"){
+    window.alert("This is not a valid topic id!");
+    window.location.href="index.html";
+  }
+
   let title = document.getElementsByTagName("h1");
   title[0].textContent = `This is quiz ${id}`;
 
@@ -118,6 +126,16 @@ function getTimeRemaining(deadline) {
   const m = Math.floor((total / 1000 / 60) % 60);
 
   return {s, m};
+}
+
+//adds maths symbols to input textbox
+function input(e) {
+    var tbInput = document.getElementById("tbInput”);
+    tbInput.value = tbInput.value + e.value;
+}
+
+function toggleMathButtons(e){
+  e.nextElementSibling.classList.toggle("hidden");
 }
 
 // loads quiz when window has loaded

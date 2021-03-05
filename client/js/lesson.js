@@ -7,6 +7,13 @@ async function loadLesson(){
   // get topic id from sessionStorage
   const id = sessionStorage.getItem("id");
 
+  // check that id is integer (sanitisation)
+  // if not error and go back to homepage
+  if !(typeof id === "integer"){
+    window.alert("This is not a valid topic id!");
+    window.location.href="index.html";
+  }
+
   // retrieve lesson data from server
   let url = `/loadLesson?id=${id}`;
   let response = await fetch(url);
