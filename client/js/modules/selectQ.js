@@ -1,4 +1,6 @@
 'use strict';
+// true/false (boolean) questions are subset of select question
+
 // loads selection input for select questions
 // checks if single select or multiple select
 // randomises answers if wanted
@@ -29,6 +31,33 @@ export function addSelectQuestion(question, q){
   return optionsSection;
 }
 
+export function addBool(question, q){
+  if (question.type.includes("random")){
+    // if Math.random() less than 0.5 answer is true
+    // else answer is false
+    answers[q] = Math.random() < 0.5;
+  } else {
+    answers[q] = question.answer;
+  }
+
+  let optionsSection = document.createElement("section");
+  optionsSection.class = "options";
+
+  const template = document.querySelector("#select");
+  console.log(template);
+
+  question.options = ["true", "false"];
+
+  // add options as DOM elements (input & matching label)
+  for (let o = 0; o < question.options.length; o++){
+    let selectEle;
+    selectEle = addOption(question, o, template);
+    optionsSection.appendChild(selectEle);
+  }
+
+  return optionsSection;
+}
+
 // random int generator for random questions
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -38,11 +67,12 @@ function getRandomInt(max) {
 function addOption(question, o, template){
   let optionName;
 
-  if (question.type.includes("random")){
-    optionName = Object.values(question.options[o])[0];
+  if (typeof question.options[o] == "object"){
+    optionName = Object.values(question.options[o]);
   } else {
     optionName = question.options[o];
   }
+
   console.log(optionName);
   // setting deep to true clones the child nodes too
   let clone = template.content.cloneNode(true);

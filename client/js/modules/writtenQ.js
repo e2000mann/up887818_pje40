@@ -5,7 +5,11 @@ export function addWrittenQuestion(question, q){
   let textInput = document.createElement("input");
   textInput.type = "text";
 
-  answers[q] = question.keywords;
+  if (question.keywords){
+    answers[q] = question.keywords;
+  } else {
+    answers[q] = question.answer;
+  }
 
   return textInput;
 }

@@ -1,7 +1,8 @@
 `use strict`;
 
+// import functions from modular code
 import { addWrittenQuestion } from './modules/writtenQ.js';
-import { addSelectQuestion } from './modules/selectQ.js';
+import { addSelectQuestion, addBool } from './modules/selectQ.js';
 import { checkAnswers } from './modules/checker.js';
 
 // global scope so all functions can access them
@@ -14,7 +15,7 @@ async function loadQuiz(){
 
   // check that id is integer (sanitisation)
   // if not error and go back to homepage
-  if !(typeof id === "integer"){
+  if (isNaN(id)){
     window.alert("This is not a valid topic id!");
     window.location.href="index.html";
   }
@@ -92,6 +93,10 @@ function addQuestions(questions){
       questionSection.appendChild(addSelectQuestion(question, q));
     }
 
+    else if (question.type.includes("true-false")){
+      questionSection.appendChild(addBool(question, q));
+    }
+
     // add question in before submit button
     document.body.insertBefore(questionSection, submitButton);
 
@@ -129,12 +134,13 @@ function getTimeRemaining(deadline) {
 }
 
 //adds maths symbols to input textbox
-function input(e) {
-    var tbInput = document.getElementById("tbInput”);
-    tbInput.value = tbInput.value + e.value;
-}
+// function input(e) {
+//     var tbInput = document.getElementById("tbInput”);
+//     tbInput.value = tbInput.value + e.value;
+// }
 
 function toggleMathButtons(e){
+  console.log("toggle");
   e.nextElementSibling.classList.toggle("hidden");
 }
 

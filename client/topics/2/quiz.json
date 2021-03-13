@@ -55,19 +55,20 @@
 			"answer": ["{0}", "%empty;"]
 		},
 		{
-			"title": "question-7",
+			"title": "What is the union of these sets?",
 			"type": "written"
 		},
 		{
-			"title": "question-8",
+			"title": "What is A∩B?",
 			"type": "written"
 		},
 		{
-			"title": "question-9",
-			"type": "written"
+			"title": "Can the intersection and the union be the same?",
+			"type": "true-false",
+			"answer": "true"
 		},
 		{
-			"title": "question-10",
+			"title": "What is the compliement of the set of all x numbers?",
 			"type": "written"
 		}
 	]

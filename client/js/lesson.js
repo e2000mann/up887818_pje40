@@ -9,7 +9,7 @@ async function loadLesson(){
 
   // check that id is integer (sanitisation)
   // if not error and go back to homepage
-  if !(typeof id === "integer"){
+  if (isNaN(id)){
     window.alert("This is not a valid topic id!");
     window.location.href="index.html";
   }
