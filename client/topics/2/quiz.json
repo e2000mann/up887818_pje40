@@ -49,10 +49,10 @@
 			"options": [
 				"{0}",
 				"{}",
-				"&empty;",
+				"∅",
 				"0"
 			],
-			"answer": ["{0}", "%empty;"]
+			"answer": ["{0}", "∅"]
 		},
 		{
 			"title": "What is the union of these sets?",
@@ -68,7 +68,7 @@
 			"answer": "true"
 		},
 		{
-			"title": "What is the compliement of the set of all x numbers?",
+			"title": "What is the complement of the set of all x numbers?",
 			"type": "written"
 		}
 	]

@@ -1,0 +1,38 @@
+{
+  "name": "Introduction to Graph Theory",
+  "paragraphs": [
+    {"text": "Graph theory is the study of graphs. A graph G is a pair (V, E) of sets, where V is a non-empty set of vertices (nodes), and E is a set of edges. Each element of E is a set of two distinct elements of V which represent the vertex where the edge starts or ends. It is generally written that G = (V, E)."},
+    {"text": "Graphs are often shown as diagrams rather than being written.",
+      "example": {
+        "imageFile": "graph.png",
+        "caption": "A graph, both drawn and written as the 2 sets."
+      }},
+    {"text": "Not everything that looks like a graph is a graph! If there are multiple edges between the same vertices, or there are loops, it is not a graph by our definition. Instead it is called a multigraph or a pseudograph. For example, the Königsberg bridge problem is an example of a multigraph.",
+      "example": {
+        "imageFile": "konigsberg.png",
+        "caption": "The Königsberg bridge problem graph"
+      }},
+    {"text": "Graphs can either be directed or undirected. In a directed graph, each edge goes in a single direction, represented using an arrow.",
+      "example": {
+        "imageFile": "directed.png",
+        "caption": "An undirected (left), and directed (right) graph."
+      }},
+    {"text": "The vertex-degree of a node is the count of how many edges are connected to the vertex. If there are no edges connected (A vertex-degree of 0), the node is isolated. When you list all of the degree-vertices (in ascending order) of a graph or multigraph it is called its degree sequence.",
+      "example": {
+        "imageFile": "degsec.png",
+        "caption": "A graph with some vertex-degrees and its degree sequence."
+      }},
+    {"text": "The sum of the degree sequence must equal twice the number of edges. This is called the Euler theorem or Handshaking lemma. Mathematically this is written as Σv∈V deg v = 2|E|. This means that we can tell a graph is invalid if the sum is an odd number or if there is an odd number of vertices with an odd degree. This allows us to prove that the previous example, whose degree sequence sums to 12, is a valid graph."},
+    {"text": "The complete graph for positive integer n (Denoted Kn) is the graph with n vertices where each vertice is connected to eachother. Using Euler's theorem, we can determine that the complete graph on n vertices has n(n-1)\\2 edges.",
+      "example": {
+        "imageFile": "complete.png",
+        "caption": "The complete graphs K1 and K4."
+      }},
+    {"text": "A bipartite graph is one whose vertices can be seperated into disjoint sets V1 and V2 in such a way that each edge joins a vertex in V1 to a vertext in V2.",
+      "example": {
+        "imageFile": "bipartite.png",
+        "caption": "A bipartite (left), and non-bipartite (right) graph."
+      }},
+    {"text": "A subgraph of a graph occurs if and only if the vertex and edge sets of the subgraph are respectively subsets of the original graph's sets."}
+  ]
+}

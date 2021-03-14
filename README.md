@@ -7,6 +7,7 @@
 - update client/topics/directory.json with topic id & name
 - add new files in client/topics/*topic id*
 - topic id must be an integer!
+- for both lesson and quiz, please remember to escape characters when necessary!
 
 ### How to add lesson to topic
 - lesson.json contains:

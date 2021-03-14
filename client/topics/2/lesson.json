@@ -6,6 +6,38 @@
         "imageFile": "example1.png",
         "caption": "A set of Fruits"
       }},
-    {"text": "Sets can be defined in 3 ways, the first way is by using a semantic definition, e.g. \"A is the set whose members are the first four positive elements\". The next way is by using the roster definition, using curly brackets to enclose the list of members, e.g. \"A={1,2,3,4}\". The final way is to use set builder notation to describe the larger set and the condition the elements must meet, e.g. \"A = {x | x is an integer and x<5}\""}
+    {"text": "Sets can be defined in 3 ways, the first way is by using a semantic definition, e.g. \"A is the set whose members are the first four positive elements\". The next way is by using the roster definition, using curly brackets to enclose the list of members, e.g. \"A={1,2,3,4}\". The final way is to use set builder notation to describe the larger set and the condition the elements must meet, e.g. \"A = {x | x is an integer and x<5}\""},
+    {"text": "There are some special sets used to represent types of numbers. These are:"},
+    {"text": "The set of Natural Numbers (N). This set includes all positive integers {0, 1, 2, 3, ...}"},
+    {"text": "The set of Integers (Z) This set includes both negative and positive integers. {..., -3, -2, -1, 0, 1, 2, 3, ...}. N is a subset of Z."},
+    {"text": "The set of Rational Numbers (Q) is the set of all numbers that can be expressed as a ratio of an integer to a non-zero integer. (e.g. 1/2 is a rational number) Z is a subset of Q."},
+    {"text": "The set of Real Numbers (R) can also include irrational numbers, such as √2 and pi!"},
+    {"text": "Another special set is the empty/null set. This can be represented using ∅. ∅ = {}. The opposite to the empty set is the universe, written as U. This contains all possible elements."},
+    {"text": "Some of the operations that can be performed on sets include union, intersection, difference and complement.",
+      "example": {
+        "imageFile": "default.png",
+        "caption": "A venn diagram showing A and B within U."
+      }},
+    {"text": "The union of two sets A and B is A ∪ B = {x | x ∈ A or x ∈ B}. This can also be written as A and B. It includes all elements from both A and B.",
+    "example": {
+      "imageFile": "union.png",
+      "caption": "A ∪ B"
+    }},
+    {"text": "The intersection of two sets A and B is A ∩ B = {x | x ∈ A and x ∈ B}. This can also be written as A or B. It includes all elements which are in both A or B. If there are none (A ∩ B = ∅), then we say that A and B are disjoint.",
+    "example": {
+      "imageFile": "intersection.png",
+      "caption": "A ∩ B"
+    }},
+    {"text": "The difference of two sets A and B is A \\ B = {x | x ∈ A and x ∈/ B}. This can also be written as A - B. It includes all elements which are in A but not in B. In this case, A \\ B doesn't always equal B \\ A.",
+    "example": {
+      "imageFile": "difference.png",
+      "caption": "A \\ B and B \\ A"
+    }},
+    {"text": "The complement of a set A is A' = {x | x ∈ U and x ∈/ A}. It can also be written with a line on top of the set name. This means not A, and includes all elements that are not in A.",
+    "example": {
+      "imageFile": "complement.png",
+      "caption": "A'"
+    }},
+    {"text": "If all elements in B are also elements of A, then B is a subset of A and this can be written as A ⊆ B. Where A has extra elements, this means that B is a proper subset of A and can also be written as A ⊂ B. If B is not a subset of A it is written as A ⊆/ B."}
   ]
 }
