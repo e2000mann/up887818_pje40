@@ -1,10 +1,20 @@
 'use strict';
+
 // true/false (boolean) questions are subset of select question
 
 // loads selection input for select questions
 // checks if single select or multiple select
 // randomises answers if wanted
-export function addSelectQuestion(question, q){
+export function addSelectQuestion(question, q, id){
+  if (question.script){
+    console.log("custom script exists");
+    // run custom script to get question and answer
+    let output = {};
+    import(`../../topics/${id}/questions.js`).then(module => {
+      output = module[question.script]();
+    });
+    console.log(`custom script output is ${output}`);
+  }
   if (question.type.includes("random")){
     // select random option for answer
     let answerNo = getRandomInt(question.options.length);
@@ -31,7 +41,21 @@ export function addSelectQuestion(question, q){
   return optionsSection;
 }
 
-export function addBool(question, q){
+export async function addBool(question, q, id){
+  if (question.script){
+    console.log("custom script exists");
+    // run custom script to get question and answer
+    let output = {};
+    let module = await import(`../../topics/${id}/questions.js`);
+    console.log(module);
+    output = module[question.script]();
+    // import(`../../topics/${id}/questions.js`).then(module => {
+    //   output = module[question.script]();
+    // });
+    console.log(`custom script output is ${output}`);
+    question.answer = output.answer;
+  }
+
   if (question.type.includes("random")){
     // if Math.random() less than 0.5 answer is true
     // else answer is false
@@ -44,7 +68,6 @@ export function addBool(question, q){
   optionsSection.class = "options";
 
   const template = document.querySelector("#select");
-  console.log(template);
 
   question.options = ["true", "false"];
 
@@ -73,7 +96,6 @@ function addOption(question, o, template){
     optionName = question.options[o];
   }
 
-  console.log(optionName);
   // setting deep to true clones the child nodes too
   let clone = template.content.cloneNode(true);
   let cloneLabel = clone.querySelector("label");

@@ -1,7 +1,7 @@
 'use strict';
 // loads text input box for written questions
 // & adds answers to pre-defined object
-export function addWrittenQuestion(question, q){
+export function addWrittenQuestion(question, q, id){
   let textInput = document.createElement("input");
   textInput.type = "text";
 

@@ -37,7 +37,8 @@
 		},
 		{
 			"title": "Are these sets equal?",
-			"type": "true-false-random"
+			"script": "q4",
+			"type": "true-false"
 		},
 		{
 			"title": "Is set x a subset of y?",

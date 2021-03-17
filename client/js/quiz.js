@@ -7,11 +7,12 @@ import { checkAnswers } from './modules/checker.js';
 
 // global scope so all functions can access them
 window.answers = {}
+let id = 0;
 
 // loads quiz into DOM
 async function loadQuiz(){
   // get topic id from sessionStorage
-  const id = sessionStorage.getItem("id");
+  id = sessionStorage.getItem("id");
 
   // check that id is integer (sanitisation)
   // if not error and go back to homepage
@@ -29,7 +30,7 @@ async function loadQuiz(){
   let quizFile = await response.json();
 
   // add questions into DOM
-  addQuestions(quizFile.questions);
+  addQuestions(quizFile.questions, module);
 
   // add click event to submit button
   let submitButton = document.getElementsByName("Submit")[0];
@@ -64,7 +65,7 @@ async function loadQuiz(){
 }
 
 // this goes through and adds the questions from the json file.
-function addQuestions(questions){
+function addQuestions(questions, functions){
   // find submit button to put questions before it
   let submitButton = document.getElementsByName("Submit")[0];
 
@@ -86,21 +87,19 @@ function addQuestions(questions){
     questionSection.appendChild(questionTitle);
 
     if (question.type == "written"){
-      questionSection.appendChild(addWrittenQuestion(question, q));
+      questionSection.appendChild(addWrittenQuestion(question, q, id));
     }
 
     else if (question.type.includes("select")){
-      questionSection.appendChild(addSelectQuestion(question, q));
+      questionSection.appendChild(addSelectQuestion(question, q, id));
     }
 
     else if (question.type.includes("true-false")){
-      questionSection.appendChild(addBool(question, q));
+      questionSection.appendChild(addBool(question, q, id));
     }
 
     // add question in before submit button
     document.body.insertBefore(questionSection, submitButton);
-
-    console.log(answers);
   }
 }
 
