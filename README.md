@@ -25,4 +25,4 @@
   - multi-select
   - true-false
   (the latter 3 can also have -random variants)
-- if the answer needs to be calculated add it into questions.js with the function name being the question number
+- if the answer needs to be calculated add it into questions.js. The function name does not necessarily have to be the question number but it is recommended for ease of use.

@@ -30,7 +30,7 @@ async function loadQuiz(){
   let quizFile = await response.json();
 
   // add questions into DOM
-  addQuestions(quizFile.questions, module);
+  await addQuestions(quizFile.questions);
 
   // add click event to submit button
   let submitButton = document.getElementsByName("Submit")[0];
@@ -65,7 +65,7 @@ async function loadQuiz(){
 }
 
 // this goes through and adds the questions from the json file.
-function addQuestions(questions, functions){
+async function addQuestions(questions){
   // find submit button to put questions before it
   let submitButton = document.getElementsByName("Submit")[0];
 
@@ -85,18 +85,21 @@ function addQuestions(questions, functions){
     questionTitle.textContent = `Question ${q+1}: ${question.title}`;
 
     questionSection.appendChild(questionTitle);
+    let questionInfo;
 
     if (question.type == "written"){
-      questionSection.appendChild(addWrittenQuestion(question, q, id));
+      questionInfo = await addWrittenQuestion(question, q, id);
     }
 
     else if (question.type.includes("select")){
-      questionSection.appendChild(addSelectQuestion(question, q, id));
+      questionInfo = await addSelectQuestion(question, q, id);
     }
 
     else if (question.type.includes("true-false")){
-      questionSection.appendChild(addBool(question, q, id));
+      questionInfo = await addBool(question, q, id);
     }
+
+    questionSection.appendChild(questionInfo);
 
     // add question in before submit button
     document.body.insertBefore(questionSection, submitButton);

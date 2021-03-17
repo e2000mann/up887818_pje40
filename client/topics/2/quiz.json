@@ -42,7 +42,8 @@
 		},
 		{
 			"title": "Is set x a subset of y?",
-			"type": "true-false-random"
+			"script": "q5",
+			"type": "true-false"
 		},
 		{
 			"title": "Which of these represents an empty set?",
@@ -57,6 +58,7 @@
 		},
 		{
 			"title": "What is the union of these sets?",
+			"script": "q7",
 			"type": "written"
 		},
 		{

@@ -5,16 +5,27 @@
 // loads selection input for select questions
 // checks if single select or multiple select
 // randomises answers if wanted
-export function addSelectQuestion(question, q, id){
+export async function addSelectQuestion(question, q, id){
+  // fragment element is used to store all elements generated in code
+  // this does not show in the final HTML.
+  let newElements = document.createElement("fragment");
   if (question.script){
     console.log("custom script exists");
     // run custom script to get question and answer
-    let output = {};
-    import(`../../topics/${id}/questions.js`).then(module => {
-      output = module[question.script]();
-    });
-    console.log(`custom script output is ${output}`);
+    let output = await loadQuestionFunction(id, question.script);
+    console.log(`custom script output is ${Object.values(output)}`);
+
+    // answer always exists
+    question.answer = output.answer;
+
+    // get example text if exists
+    if (output.exampleText){
+      let exampleText = document.createElement("p");
+      exampleText.textContent = output.exampleText;
+      newElements.appendChild(exampleText);
+    }
   }
+
   if (question.type.includes("random")){
     // select random option for answer
     let answerNo = getRandomInt(question.options.length);
@@ -38,22 +49,29 @@ export function addSelectQuestion(question, q, id){
     optionsSection.appendChild(selectEle);
   }
 
-  return optionsSection;
+  newElements.appendChild(optionsSection);
+  return newElements;
 }
 
 export async function addBool(question, q, id){
+  // fragment element is used to store all elements generated in code
+  // this does not show in the final HTML.
+  let newElements = document.createElement("fragment");
   if (question.script){
     console.log("custom script exists");
     // run custom script to get question and answer
-    let output = {};
-    let module = await import(`../../topics/${id}/questions.js`);
-    console.log(module);
-    output = module[question.script]();
-    // import(`../../topics/${id}/questions.js`).then(module => {
-    //   output = module[question.script]();
-    // });
-    console.log(`custom script output is ${output}`);
+    let output = await loadQuestionFunction(id, question.script);
+    console.log(`custom script output is ${Object.values(output)}`);
+
+    // answer always exists
     question.answer = output.answer;
+
+    // get example text if exists
+    if (output.exampleText){
+      let exampleText = document.createElement("p");
+      exampleText.textContent = output.exampleText;
+      newElements.appendChild(exampleText);
+    }
   }
 
   if (question.type.includes("random")){
@@ -78,7 +96,8 @@ export async function addBool(question, q, id){
     optionsSection.appendChild(selectEle);
   }
 
-  return optionsSection;
+  newElements.appendChild(optionsSection);
+  return newElements;
 }
 
 // random int generator for random questions
@@ -152,4 +171,13 @@ function correctCheckboxes(section) {
   for (const option of options) {
     option.checked = option.classList.contains("selected");
   }
+}
+
+// loads question.js from topic folder
+// runs script given in question data & returns output
+async function loadQuestionFunction(id, functName){
+  let output = {};
+  let module = await import(`../../topics/${id}/questions.js`);
+  output = module[functName]();
+  return output;
 }
