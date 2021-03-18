@@ -51,6 +51,7 @@ export function q5(){
   return output;
 }
 
+// gets 2 sets length 4, finds union
 export function q7(){
   const numbers = [1,2,3,4,5,6,7,8,9,10];
   let output = {};
@@ -60,8 +61,26 @@ export function q7(){
 
   output.exampleText = `1) {${set1}}, 2) {${set2}}`;
 
+  let union = set1.filter(element => set2.includes(element));
+  output.answer = union;
+
+  return output;
+}
+
+// gets 2 sets length 4, finds intersection
+export function q8(){
+  const numbers = [1,2,3,4,5,6,7,8,9,10];
+  let output = {};
+
+  let set1 = generateSet(numbers);
+  let set2 = generateSet(numbers);
+
+  output.exampleText = `A={${set1}}, B={${set2}}`;
+
   let intersection = set1.filter(element => !set2.includes(element));
   output.answer = intersection;
+
+  return output;
 }
 
 function generateSet(numbers, length=4){

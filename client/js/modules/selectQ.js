@@ -6,14 +6,11 @@
 // checks if single select or multiple select
 // randomises answers if wanted
 export async function addSelectQuestion(question, q, id){
-  // fragment element is used to store all elements generated in code
-  // this does not show in the final HTML.
-  let newElements = document.createElement("fragment");
+  let exampleText;
+
   if (question.script){
-    console.log("custom script exists");
     // run custom script to get question and answer
     let output = await loadQuestionFunction(id, question.script);
-    console.log(`custom script output is ${Object.values(output)}`);
 
     // answer always exists
     question.answer = output.answer;
@@ -22,16 +19,17 @@ export async function addSelectQuestion(question, q, id){
     if (output.exampleText){
       let exampleText = document.createElement("p");
       exampleText.textContent = output.exampleText;
-      newElements.appendChild(exampleText);
     }
   }
 
   if (question.type.includes("random")){
     // select random option for answer
     let answerNo = getRandomInt(question.options.length);
-    console.log(answerNo);
-    console.log(question.options[answerNo]);
     answers[q] = question.options[answerNo];
+
+    let exampleText = document.createElement("p");
+    exampleText.textContent = Object.keys(answers[q])[0];
+
   } else {
     answers[q] = question.answer;
   }
@@ -40,7 +38,6 @@ export async function addSelectQuestion(question, q, id){
   optionsSection.class = "options";
 
   const template = document.querySelector("#select");
-  console.log(template);
 
   // add options as DOM elements (input & matching label)
   for (let o = 0; o < question.options.length; o++){
@@ -49,28 +46,27 @@ export async function addSelectQuestion(question, q, id){
     optionsSection.appendChild(selectEle);
   }
 
-  newElements.appendChild(optionsSection);
-  return newElements;
+  if (exampleText !== undefined){
+    return [exampleText, optionsSection];
+  } else{
+    return [optionsSection];
+  }
 }
 
 export async function addBool(question, q, id){
-  // fragment element is used to store all elements generated in code
-  // this does not show in the final HTML.
-  let newElements = document.createElement("fragment");
+  let exampleText;
+
   if (question.script){
-    console.log("custom script exists");
     // run custom script to get question and answer
     let output = await loadQuestionFunction(id, question.script);
-    console.log(`custom script output is ${Object.values(output)}`);
 
     // answer always exists
     question.answer = output.answer;
 
     // get example text if exists
     if (output.exampleText){
-      let exampleText = document.createElement("p");
+      exampleText = document.createElement("p");
       exampleText.textContent = output.exampleText;
-      newElements.appendChild(exampleText);
     }
   }
 
@@ -96,8 +92,11 @@ export async function addBool(question, q, id){
     optionsSection.appendChild(selectEle);
   }
 
-  newElements.appendChild(optionsSection);
-  return newElements;
+  if (exampleText !== undefined){
+    return [exampleText, optionsSection];
+  } else{
+    return [optionsSection];
+  }
 }
 
 // random int generator for random questions

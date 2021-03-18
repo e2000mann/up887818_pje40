@@ -8,7 +8,7 @@
 			]
 		},
 		{
-			"title": "Which of these is the set of x?",
+			"title": "Which of these is the set of",
 			"type": "single-select-random",
 			"options": [{
 					"Natural Numbers": "N"
@@ -41,7 +41,7 @@
 			"type": "true-false"
 		},
 		{
-			"title": "Is set x a subset of y?",
+			"title": "Is set 1 a subset of set 2?",
 			"script": "q5",
 			"type": "true-false"
 		},
@@ -63,6 +63,7 @@
 		},
 		{
 			"title": "What is A∩B?",
+			"script": "q8",
 			"type": "written"
 		},
 		{
@@ -71,7 +72,7 @@
 			"answer": "true"
 		},
 		{
-			"title": "What is the complement of the set of all x numbers?",
+			"title": "What is the complement of the set of all",
 			"type": "written"
 		}
 	]

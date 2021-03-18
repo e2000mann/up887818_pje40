@@ -85,7 +85,7 @@ async function addQuestions(questions){
     questionTitle.textContent = `Question ${q+1}: ${question.title}`;
 
     questionSection.appendChild(questionTitle);
-    let questionInfo;
+    let questionInfo = [];
 
     if (question.type == "written"){
       questionInfo = await addWrittenQuestion(question, q, id);
@@ -99,7 +99,7 @@ async function addQuestions(questions){
       questionInfo = await addBool(question, q, id);
     }
 
-    questionSection.appendChild(questionInfo);
+    questionInfo.forEach(element => questionSection.appendChild(element));
 
     // add question in before submit button
     document.body.insertBefore(questionSection, submitButton);
