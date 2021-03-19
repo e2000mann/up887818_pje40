@@ -17,15 +17,26 @@ export async function addWrittenQuestion(question, q, id){
       exampleText.textContent = output.exampleText;
     }
   }
+  else if (question.type.includes("random")){
+    // select random option for answer
+    let answerNo = getRandomInt(question.options.length);
+    answers[q] = question.options[answerNo];
+    console.log(answers[q]);
+
+    exampleText = document.createElement("p");
+    exampleText.textContent = Object.keys(answers[q])[0];
+    console.log(exampleText);
+
+  } else {
+    if (question.keywords){
+      answers[q] = question.keywords;
+    } else {
+      answers[q] = question.answer;
+    }
+  }
 
   let textInput = document.createElement("input");
   textInput.type = "text";
-
-  if (question.keywords){
-    answers[q] = question.keywords;
-  } else {
-    answers[q] = question.answer;
-  }
 
   if (exampleText !== undefined){
     return [exampleText, textInput];

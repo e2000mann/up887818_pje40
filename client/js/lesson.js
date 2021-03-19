@@ -29,7 +29,6 @@ async function loadLesson(){
 
   // add paragraphs
   for (const para of lessonFile.paragraphs){
-    console.log(para);
     addParagraph(para, quizButtons, id);
   }
 
@@ -52,7 +51,7 @@ function addParagraph(para, quizButtons, id){
   paraSection.appendChild(paraElement);
 
   // figure tag to store example (if necessary)
-  if ("example" in para) {
+  if (para.example) {
     let exampleFigure = document.createElement("figure");
 
     // img tag & figcaption to go inside figure tag

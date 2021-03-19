@@ -27,7 +27,7 @@ export async function addSelectQuestion(question, q, id){
     let answerNo = getRandomInt(question.options.length);
     answers[q] = question.options[answerNo];
 
-    let exampleText = document.createElement("p");
+    exampleText = document.createElement("p");
     exampleText.textContent = Object.keys(answers[q])[0];
 
   } else {

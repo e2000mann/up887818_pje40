@@ -13,7 +13,6 @@ async function loadTopics(){
   let url = '/loadDir';
   let response = await fetch(url);
   let directory = await response.json();
-  console.log(directory);
   let topics = directory.topics;
 
   // gets template from index.html
@@ -70,7 +69,6 @@ function addTopicSection(value){
   const quizButtons = document.querySelector("#quizButtons");
 
   let sectionEle = clone.querySelectorAll("section")[0];
-  console.log(sectionEle);
   sectionEle.setAttribute("id",value.id);
   sectionEle.setAttribute("name",value.name);
 
@@ -84,8 +82,6 @@ function addTopicSection(value){
   // change onClick functions for buttons to load right lesson/quiz
   let buttons = clone.querySelectorAll("button");
   setButtonEvents(buttons, value.id);
-
-  console.log(clone.querySelectorAll("button"));
 
   // check for Highscore
   updateHighscore(value.id, clone.querySelector(".topicScore"));
@@ -103,7 +99,6 @@ function setButtonEvents(buttons, id){
   buttons[1].setAttribute("onClick", `loadQuiz(${id})`);
   // Share button
   buttons[2].setAttribute("onClick", `shareFB()`);
-  console.log("set buttons");
 }
 
 // function to redirect to lesson page
@@ -117,7 +112,6 @@ function loadQuiz(id){
   let quizButtons = document.querySelector("#quizButtons");
   if (quizButtons.className.includes("hidden")){
     sessionStorage.setItem("id", id);
-    console.log("hidden");
     // set click functions for button
     setQuizButtons(quizButtons, id);
     // cancel button (runs same function to hide buttons)

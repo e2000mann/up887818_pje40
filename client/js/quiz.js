@@ -83,8 +83,23 @@ async function addQuestions(questions){
 
     let questionTitle = document.createElement("p");
     questionTitle.textContent = `Question ${q+1}: ${question.title}`;
-
     questionSection.appendChild(questionTitle);
+
+    if (question.example){
+      let exampleFigure = document.createElement("figure");
+
+      let questionImage = document.createElement("img");
+      questionImage.src = `../topics/${id}/${question.example.imageFile}`;
+
+      let imageFigCaption = document.createElement("figcaption");
+      imageFigCaption.textContent = question.example.caption;
+
+      exampleFigure.appendChild(questionImage);
+      exampleFigure.appendChild(imageFigCaption);
+
+      questionSection.appendChild(exampleFigure);
+    }
+
     let questionInfo = [];
 
     if (question.type == "written"){

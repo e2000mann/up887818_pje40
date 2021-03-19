@@ -73,7 +73,14 @@
 		},
 		{
 			"title": "What is the complement of the set of all",
-			"type": "written"
+			"type": "written-random",
+			"options": [{
+					"Odd numbers": "Even"
+				},
+				{
+					"Even numbers": "Odd"
+				}
+			]
 		}
 	]
 }
