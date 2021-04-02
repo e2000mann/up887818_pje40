@@ -1,17 +1,24 @@
 `use strict`;
 
-import { setQuizButtons } from './modules/quizButtons.js';
+import {
+  setQuizButtons
+} from './modules/quizButtons.js';
+import {
+  checkScreenSize,
+  setControlButtons
+} from './modules/forwardbackbuttons.js';
 
 // loads lesson into DOM
-async function loadLesson(){
+async function loadLesson() {
+
   // get topic id from sessionStorage
   const id = sessionStorage.getItem("id");
 
   // check that id is integer (sanitisation)
   // if not error and go back to homepage
-  if (isNaN(id)){
+  if (isNaN(id)) {
     window.alert("This is not a valid topic id!");
-    window.location.href="index.html";
+    window.location.href = "index.html";
   }
 
   // retrieve lesson data from server
@@ -26,22 +33,29 @@ async function loadLesson(){
 
   // all paragraphs must be before quiz buttons
   let quizButtons = document.querySelector("#quizButtons");
+  let container = document.createElement("section");
+  container.classList.add("container");
+  document.body.insertBefore(container, controlButtons);
 
   // add paragraphs
-  for (const para of lessonFile.paragraphs){
-    addParagraph(para, quizButtons, id);
+  for (const para of lessonFile.paragraphs) {
+    addParagraph(para, container, id);
   }
 
   setQuizButtons(quizButtons, id);
+  setControlButtons(controlButtons);
 
   // remove quizButtons for first lesson - no quiz available
-  if (id === "1"){
+  if (id === "1") {
     quizButtons.remove();
   }
+
+  // check screen size for button
+  checkScreenSize();
 }
 
 // adds paragraph of lesson into DOM (before quiz buttons)
-function addParagraph(para, quizButtons, id){
+function addParagraph(para, container, id) {
   // create section to store paragraph text & example
   let paraSection = document.createElement("section");
 
@@ -69,11 +83,17 @@ function addParagraph(para, quizButtons, id){
     paraSection.appendChild(exampleFigure);
   }
 
-  // add section to DOM
-  // before quiz buttons (specified earlier)
-  document.body.insertBefore(paraSection, quizButtons);
+  // add section to DOM in container element
+  container.appendChild(paraSection);
 }
 
 
 //loads lesson when window has loaded
 window.onload = loadLesson;
+//checks window when resized to see if mobile design required
+// set it so that it waits 100ms (so that it doesn't repeatedly call)
+let done;
+window.onresize = function() {
+  clearTimeout(done);
+  done = setTimeout(checkScreenSize, 100);
+}

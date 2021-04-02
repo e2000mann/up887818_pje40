@@ -27,6 +27,7 @@ h1 {
 }
 
 @media (prefers-color-scheme: dark) {
+
   /* variables for dark theme */
   :root {
     --bg-color: #2F2F2F;
@@ -35,8 +36,12 @@ h1 {
   }
 }
 
-@media (max-width: 40em){
+@media (orientation: portrait) {
   .headers *, .topic * {
     flex-direction: row;
+  }
+
+  img {
+    width: 80%;
   }
 }
