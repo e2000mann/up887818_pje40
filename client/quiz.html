@@ -16,12 +16,17 @@
   <!-- Prepared DOM elements (& submit button below)-->
   <h1>This is quiz x</h1>
   <p class="clock">You have x remaining</p>
-  <button name="back" onClick="window.location.href = `index.html`;"
-  title="Your answers will be saved">
-    Go back
+  <button name="back" onClick="window.location.href = `index.html`;" title="Your answers will be saved">
+    Go Home
   </button>
 
   <!-- Custom elements are here -->
+
+  <section id="controlButtons" class="hidden">
+    <button name="previous"> ◀ Previous </button>
+    <button name="next"> Next ▶ </button>
+  </section>
+
   <button type="button" name="Submit">Submit Answers</button>
 
   <button name="mathButtonToggle" onclick="toggleMathButtons()">Symbols</button>
@@ -34,9 +39,9 @@
 
 <!-- Templates -->
 <template id="select">
-    <input type="checkbox"></input>
-    <label>
-    </label>
+  <input type="checkbox"></input>
+  <label>
+  </label>
 </template>
 
 </html>
