@@ -1,9 +1,11 @@
 'use strict';
 
-import { setQuizButtons } from './modules/quizButtons.js';
+import {
+  setQuizButtons
+} from './modules/quizButtons.js';
 
 //loads topics into DOM
-async function loadTopics(){
+async function loadTopics() {
   // adds button functions to global scope (since this is type module)
   window.loadQuiz = loadQuiz;
   window.loadLesson = loadLesson;
@@ -27,7 +29,7 @@ async function loadTopics(){
 }
 
 // special function for 1st topic only
-function addSpecialTopicSection(value){
+function addSpecialTopicSection(value) {
   // copy template content (inc. children)
   let clone = topicSection.content.cloneNode(true);
 
@@ -61,7 +63,7 @@ function addSpecialTopicSection(value){
 }
 
 // function for rest of topics
-function addTopicSection(value){
+function addTopicSection(value) {
   // copy template content (inc. children)
   let clone = topicSection.content.cloneNode(true);
 
@@ -69,8 +71,8 @@ function addTopicSection(value){
   const quizButtons = document.querySelector("#quizButtons");
 
   let sectionEle = clone.querySelectorAll("section")[0];
-  sectionEle.setAttribute("id",value.id);
-  sectionEle.setAttribute("name",value.name);
+  sectionEle.setAttribute("id", value.id);
+  sectionEle.setAttribute("name", value.name);
 
   // change text using value
   // output = "n) Topic name", where n is topic id
@@ -92,7 +94,7 @@ function addTopicSection(value){
 }
 
 //function to set onclick functions
-function setButtonEvents(buttons, id){
+function setButtonEvents(buttons, id) {
   // lesson button
   buttons[0].setAttribute("onClick", `loadLesson(${id})`);
   // Quiz button
@@ -102,15 +104,15 @@ function setButtonEvents(buttons, id){
 }
 
 // function to redirect to lesson page
-function loadLesson(id){
+function loadLesson(id) {
   sessionStorage.setItem("id", id);
   window.location.href = "lesson.html";
 }
 
 //function to redirect to quiz page
-function loadQuiz(id){
+function loadQuiz(id) {
   let quizButtons = document.querySelector("#quizButtons");
-  if (quizButtons.className.includes("hidden")){
+  if (quizButtons.className.includes("hidden")) {
     sessionStorage.setItem("id", id);
     // set click functions for button
     setQuizButtons(quizButtons, id);
@@ -122,8 +124,8 @@ function loadQuiz(id){
 }
 
 // function to check if score exists & update score element if yes
-function updateHighscore(id, scoreText){
-  if (id in localStorage){
+function updateHighscore(id, scoreText) {
+  if (id in localStorage) {
     let rawScore = localStorage.getItem(id);
     // raw score is between 0 (0%) and 1000 (100%)
     let percentage = rawScore / 10;
@@ -133,8 +135,8 @@ function updateHighscore(id, scoreText){
 }
 
 // for facebook share function - use a different quote if user has score for topic
-function getQuote(id, name){
-  if (id in sessionStorage){
+function getQuote(id, name) {
+  if (id in sessionStorage) {
     let score = sessionStorage.getItem(id);
     return `I scored ${percentage}% on the ${name} quiz! Learn Discrete Mathematics here!`;
   } else {

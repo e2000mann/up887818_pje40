@@ -70,7 +70,7 @@ function addParagraph(para, container, id) {
 
     // img tag & figcaption to go inside figure tag
     let exampleImg = document.createElement("img");
-    exampleImg.src = `../topics/${id}/${para.example.imageFile}`;
+    exampleImg.src = `../topics/${id}/images/${para.example.imageFile}`;
 
     let exampleFigCaption = document.createElement("figcaption");
     exampleFigCaption.textContent = para.example.caption;

@@ -111,7 +111,7 @@ async function addQuestions(questions, container) {
       let exampleFigure = document.createElement("figure");
 
       let questionImage = document.createElement("img");
-      questionImage.src = `../topics/${id}/${question.example.imageFile}`;
+      questionImage.src = `../topics/${id}/images/${question.example.imageFile}`;
 
       let imageFigCaption = document.createElement("figcaption");
       imageFigCaption.textContent = question.example.caption;
