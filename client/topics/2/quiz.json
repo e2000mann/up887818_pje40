@@ -54,7 +54,7 @@
 				"∅",
 				"0"
 			],
-			"answer": ["{0}", "∅"]
+			"answer": ["{}", "∅"]
 		},
 		{
 			"title": "What is the union of these sets?",
@@ -75,10 +75,10 @@
 			"title": "What is the complement of the set of all",
 			"type": "written-random",
 			"options": [{
-					"Odd numbers": "Even"
+					"Even Numbers": "Odd"
 				},
 				{
-					"Even numbers": "Odd"
+					"Odd Numbers": "Even"
 				}
 			]
 		}

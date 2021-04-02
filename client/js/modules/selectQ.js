@@ -5,10 +5,10 @@
 // loads selection input for select questions
 // checks if single select or multiple select
 // randomises answers if wanted
-export async function addSelectQuestion(question, q, id){
+export async function addSelectQuestion(question, q, id) {
   let exampleText;
 
-  if (question.script){
+  if (question.script) {
     // run custom script to get question and answer
     let output = await loadQuestionFunction(id, question.script);
 
@@ -16,19 +16,20 @@ export async function addSelectQuestion(question, q, id){
     question.answer = output.answer;
 
     // get example text if exists
-    if (output.exampleText){
+    if (output.exampleText) {
       let exampleText = document.createElement("p");
       exampleText.textContent = output.exampleText;
     }
   }
 
-  if (question.type.includes("random")){
+  if (question.type.includes("random")) {
     // select random option for answer
     let answerNo = getRandomInt(question.options.length);
-    answers[q] = question.options[answerNo];
+    let answer = question.options[answerNo];
+    answers[q] = Object.values(answer)[0];
 
     exampleText = document.createElement("p");
-    exampleText.textContent = Object.keys(answers[q])[0];
+    exampleText.textContent = Object.keys(answer)[0];
 
   } else {
     answers[q] = question.answer;
@@ -40,23 +41,23 @@ export async function addSelectQuestion(question, q, id){
   const template = document.querySelector("#select");
 
   // add options as DOM elements (input & matching label)
-  for (let o = 0; o < question.options.length; o++){
+  for (let o = 0; o < question.options.length; o++) {
     let selectEle;
     selectEle = addOption(question, o, template);
     optionsSection.appendChild(selectEle);
   }
 
-  if (exampleText !== undefined){
+  if (exampleText !== undefined) {
     return [exampleText, optionsSection];
-  } else{
+  } else {
     return [optionsSection];
   }
 }
 
-export async function addBool(question, q, id){
+export async function addBool(question, q, id) {
   let exampleText;
 
-  if (question.script){
+  if (question.script) {
     // run custom script to get question and answer
     let output = await loadQuestionFunction(id, question.script);
 
@@ -64,13 +65,13 @@ export async function addBool(question, q, id){
     question.answer = output.answer;
 
     // get example text if exists
-    if (output.exampleText){
+    if (output.exampleText) {
       exampleText = document.createElement("p");
       exampleText.textContent = output.exampleText;
     }
   }
 
-  if (question.type.includes("random")){
+  if (question.type.includes("random")) {
     // if Math.random() less than 0.5 answer is true
     // else answer is false
     answers[q] = Math.random() < 0.5;
@@ -86,15 +87,15 @@ export async function addBool(question, q, id){
   question.options = ["true", "false"];
 
   // add options as DOM elements (input & matching label)
-  for (let o = 0; o < question.options.length; o++){
+  for (let o = 0; o < question.options.length; o++) {
     let selectEle;
     selectEle = addOption(question, o, template);
     optionsSection.appendChild(selectEle);
   }
 
-  if (exampleText !== undefined){
+  if (exampleText !== undefined) {
     return [exampleText, optionsSection];
-  } else{
+  } else {
     return [optionsSection];
   }
 }
@@ -105,10 +106,10 @@ function getRandomInt(max) {
 }
 
 // adds input & label for an option
-function addOption(question, o, template){
+function addOption(question, o, template) {
   let optionName;
 
-  if (typeof question.options[o] == "object"){
+  if (typeof question.options[o] == "object") {
     optionName = Object.values(question.options[o]);
   } else {
     optionName = question.options[o];
@@ -125,7 +126,7 @@ function addOption(question, o, template){
   cloneSelect.name = optionName;
 
   // set it so that only one input can be checked at a time
-  if (question.type.includes("single")){
+  if (question.type.includes("single")) {
     cloneSelect.addEventListener("click", toggleSelected);
   }
 
@@ -174,7 +175,7 @@ function correctCheckboxes(section) {
 
 // loads question.js from topic folder
 // runs script given in question data & returns output
-async function loadQuestionFunction(id, functName){
+async function loadQuestionFunction(id, functName) {
   let output = {};
   let module = await import(`../../topics/${id}/questions.js`);
   output = module[functName]();

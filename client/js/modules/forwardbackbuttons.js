@@ -3,7 +3,7 @@
 export function checkScreenSize() {
   let controlButtons = document.querySelector("#controlButtons");
   let container = document.querySelector(".container");
-  let paragraphs = container.querySelectorAll("section");
+  let paragraphs = container.childNodes;
 
   let currentlyHidden = controlButtons.classList.contains("hidden");
   let landscape = window.innerWidth > window.innerHeight;
@@ -51,7 +51,7 @@ export function setControlButtons(controlButtons) {
 
 function goBack() {
   let container = document.querySelector(".container");
-  let paragraphs = container.querySelectorAll("section");
+  let paragraphs = container.childNodes;
   console.log("go back");
   for (let i = 1; i < paragraphs.length; i++) {
     let element = paragraphs[i]
@@ -67,7 +67,7 @@ function goBack() {
 
 function goNext() {
   let container = document.querySelector(".container");
-  let paragraphs = container.querySelectorAll("section");
+  let paragraphs = container.childNodes;
   console.log("go next");
   let endI = paragraphs.length - 1;
   for (let i = 0; i < endI; i++) {

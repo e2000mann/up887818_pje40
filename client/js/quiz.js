@@ -124,7 +124,7 @@ async function addQuestions(questions, container) {
 
     let questionInfo = [];
 
-    if (question.type == "written") {
+    if (question.type.includes("written")) {
       questionInfo = await addWrittenQuestion(question, q, id);
     } else if (question.type.includes("select")) {
       questionInfo = await addSelectQuestion(question, q, id);
