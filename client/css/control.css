@@ -1,0 +1,17 @@
+.controlButtons {
+  display: hidden;
+}
+
+@media (orientation: portrait) {
+  .controlButtons {
+    display: inline;
+  }
+
+  .container>section {
+    display: hidden;
+  }
+
+  :focus {
+    display: inline;
+  }
+}
