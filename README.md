@@ -1,5 +1,11 @@
 # up887818_pje40
  Online Discrete Mathematics Learning Resource
+ 
+## Instructions
+npm install - to install all dependancies required (express, fs)
+npm start - to run server.js
+
+Server will by default run on port 8080
 
 ## For maintainability
 
