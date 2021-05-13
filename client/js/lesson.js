@@ -24,30 +24,36 @@ async function loadLesson() {
   // retrieve lesson data from server
   let url = `/loadLesson?id=${id}`;
   let response = await fetch(url);
-  let lessonFile = await response.json();
 
-  // use lesson data to update DOM
-  // update title
-  let title = document.getElementsByTagName("h1");
-  title[0].textContent = `Lesson ${id}: ${lessonFile.name}`;
+  try {
+    let lessonFile = await response.json();
 
-  // all paragraphs must be before quiz buttons
-  let quizButtons = document.querySelector("#quizButtons");
-  let container = document.createElement("section");
-  container.classList.add("container");
-  document.body.insertBefore(container, controlButtons);
+    // use lesson data to update DOM
+    // update title
+    let title = document.getElementsByTagName("h1");
+    title[0].textContent = `Lesson ${id}: ${lessonFile.name}`;
 
-  // add paragraphs
-  for (const para of lessonFile.paragraphs) {
-    addParagraph(para, container, id);
-  }
+    // all paragraphs must be before quiz buttons
+    let quizButtons = document.querySelector("#quizButtons");
+    let container = document.createElement("section");
+    container.classList.add("container");
+    document.body.insertBefore(container, controlButtons);
 
-  setQuizButtons(quizButtons, id);
-  setControlButtons(controlButtons);
+    // add paragraphs
+    for (const para of lessonFile.paragraphs) {
+      addParagraph(para, container, id);
+    }
 
-  // remove quizButtons for first lesson - no quiz available
-  if (id === "1") {
-    quizButtons.remove();
+    setQuizButtons(quizButtons, id);
+    setControlButtons(controlButtons);
+
+    // remove quizButtons for first lesson - no quiz available
+    if (id === "1") {
+      quizButtons.remove();
+    }
+  } catch (err) {
+    window.alert("This is not a valid topic id!");
+    window.location.href = "index.html";
   }
 
   // check screen size for button

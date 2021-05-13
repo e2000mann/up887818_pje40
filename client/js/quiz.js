@@ -32,54 +32,59 @@ async function loadQuiz() {
     window.location.href = "index.html";
   }
 
-  let title = document.getElementsByTagName("h1");
-  title[0].textContent = `This is quiz ${id}`;
+  try {
+    let title = document.getElementsByTagName("h1");
+    title[0].textContent = `This is quiz ${id}`;
 
-  // get questions json file from server
-  let url = `/loadQuiz?id=${id}`;
-  let response = await fetch(url);
-  let quizFile = await response.json();
+    // get questions json file from server
+    let url = `/loadQuiz?id=${id}`;
+    let response = await fetch(url);
+    let quizFile = await response.json();
 
-  let container = document.createElement("section");
-  container.classList.add("container");
-  document.body.insertBefore(container, controlButtons);
+    let container = document.createElement("section");
+    container.classList.add("container");
+    document.body.insertBefore(container, controlButtons);
 
-  // add questions into DOM
-  await addQuestions(quizFile.questions, container);
+    // add questions into DOM
+    await addQuestions(quizFile.questions, container);
 
-  // add click event to submit button
-  let submitButton = document.getElementsByName("Submit")[0];
-  // function has to be nested so that it does not run automatically
-  submitButton.addEventListener("click", () => {
-    saveScore(id);
-  });
+    // add click event to submit button
+    let submitButton = document.getElementsByName("Submit")[0];
+    // function has to be nested so that it does not run automatically
+    submitButton.addEventListener("click", () => {
+      saveScore(id);
+    });
 
-  setControlButtons(controlButtons);
+    setControlButtons(controlButtons);
 
-  let clock = document.querySelector(".clock");
+    let clock = document.querySelector(".clock");
 
-  if (sessionStorage.getItem("time") != 0) {
-    //timed quiz
-    let time = sessionStorage.getItem("time");
-    const deadline = new Date((new Date()).getTime() + time * 60000); // minutes
-    updateClock(clock, deadline, id)
-    // update clock once a second
-    let timer = setInterval(updateClock, 1000);
+    if (sessionStorage.getItem("time") != 0) {
+      //timed quiz
+      let time = sessionStorage.getItem("time");
+      const deadline = new Date((new Date()).getTime() + time * 60000); // minutes
+      updateClock(clock, deadline, id)
+      // update clock once a second
+      let timer = setInterval(updateClock, 1000);
 
-    // update clock element
-    function updateClock() {
-      const t = getTimeRemaining(deadline);
-      if (t.m < 0) {
-        console.log("save");
-        clearInterval(timer);
-        saveScore(id);
+      // update clock element
+      function updateClock() {
+        const t = getTimeRemaining(deadline);
+        if (t.m < 0) {
+          console.log("save");
+          clearInterval(timer);
+          saveScore(id);
+        }
+        clock.textContent = `You have ${t.m} minute(s) and ${t.s} second(s) remaining`;
       }
-      clock.textContent = `You have ${t.m} minute(s) and ${t.s} second(s) remaining`;
-    }
 
-  } else {
-    //untimed quiz - no clock required.
-    clock.remove();
+    } else {
+      //untimed quiz - no clock required.
+      clock.remove();
+    }
+  } catch (err) {
+    window.alert("This is not a valid topic id!");
+    window.location.href = "index.html";
   }
 
   // check screen size for button
