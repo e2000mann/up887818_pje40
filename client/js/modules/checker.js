@@ -25,7 +25,8 @@ export function checkAnswers() {
 
 // checks written answer
 function checkWrittenAnswer(answerInput, q) {
-  let answer = answerInput.value || "";
+  // convert both answers to uppercase
+  let answer = answerInput.value.toUpperCase() || "";
   console.log(answer);
   let correctAnswer = answers[q];
   console.log(`correct answer is ${typeof(correctAnswer)}`);
@@ -38,15 +39,19 @@ function checkWrittenAnswer(answerInput, q) {
     // how many keywords are in user's answer?
     let includedWords = 0;
     for (const index in correctAnswer) {
-      if (answer.includes(correctAnswer[index])) {
+      let upper = correctAnswer[index.toUpperCase()];
+      if (answer.includes(upper)) {
         includedWords++;
       }
     }
 
     return includedWords * scoreForEach;
   } else {
-    if (answer == correctAnswer) {
+    if (answer == correctAnswer.toUpperCase()) {
       return 100;
+    }
+    else {
+      return 0;
     }
   }
 }
